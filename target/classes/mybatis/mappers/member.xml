@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.member">
+	 
+	<!-- 
+	<resultMap id="memResult" type="java.util.HashMap">
+      <result property="id" column="id" />
+      <result property="pwd" column="pwd" />
+      <result property="name" column="name" />
+      <result property="email" column="email" />
+      <result property="joinDate" column="joinDate" />
+   </resultMap> -->
+
+<!-- CDATA 내용안을 문자열로 다 치환해버림 -->
+
+ <resultMap id="memList" type="memberVO"> <!-- config 에서 memberVO의 별칭 -->
+        <result property="name" column="name" /> 
+          <result property="age" column="age" /> 
+</resultMap>
+	<select id="selectAll" resultMap="memList">
+      <![CDATA[
+         select * from tabna	
+      ]]>
+	</select>
+	
+	  <insert id="insert"  parameterType="memberVO">
+		<![CDATA[
+		 insert into tabna(name,age)
+		 values(#{name},#{age})
+		]]>      
+	</insert>
+	
+    <update id="update"  parameterType="memberVO">
+     <![CDATA[
+	     update tabna
+	     set name=#{name}, age=#{age}
+	     where
+	     name=#{name}
+      ]]>      
+   </update> 
+   <delete id="delete"  parameterType="String">
+	<![CDATA[
+	   delete from  tabna
+	   where
+	   name=#{name}
+	]]>      
+  </delete>
+ 
+  <select id="selectByName"  resultType="memberVO"   parameterType="String" >
+    <![CDATA[
+		select * from tabna	
+		where name=#{name}		
+	]]>
+  </select>
+
+<!-- 테이블 생성을 위해서 일부러 만들어 버림 -->
+<select id="CreateTable" parameterType="HashMap">	
+   <![CDATA[ ${sql} ]]> 
+ </select>
+
+
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans        
+    http://www.springframework.org/schema/beans/spring-beans.xsd        
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context.xsd
+     http://www.springframework.org/schema/mvc
+  http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- 컨트롤러 위치 설정 -->
+
+	<mvc:annotation-driven /> 
+	<mvc:resources mapping="/resources/**" location="/resources/"></mvc:resources>
+	<mvc:default-servlet-handler />
+	<mvc:view-controller path="t9/" view-name="Tiger"/>
+	<context:component-scan base-package="Member.*"> 
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
+	</context:component-scan><!--패키지 -->
+	<!-- 뷰 위치 설정 -->
+	<mvc:view-resolvers>
+		<mvc:jsp prefix="/WEB-INF/views/" /> <!--jsp파일을 여기에 넣으면됨-->
+		<!-- <mvc:jsp prefix="/WEB-INF/views/" xxxxxxxxxxxxx/> -->
+	</mvc:view-resolvers>
+</beans>
